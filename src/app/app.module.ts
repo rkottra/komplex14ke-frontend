@@ -6,15 +6,19 @@ import { AppComponent } from './app.component';
 import { PilotaComponent } from './pilota/pilota.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { PilotakComponent } from './pilota/pilotak.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PilotaComponent
+    PilotaComponent,
+    PilotakComponent
   ],
   imports: [
     RouterModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

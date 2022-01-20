@@ -1,0 +1,22 @@
+
+
+
+<input type="text" [(ngModel)]="query" />
+<button (click)="kereses()">Keresés</button>
+
+<table border="1">
+    <tr>
+        <th style="width: 150px;">ID</th>
+        <th style="width: 150px;">Név</th>
+        <th style="width: 150px;">Születési dátum</th>
+        <th style="width: 150px;">Magasság</th>
+        <th style="width: 150px;">Csapatnév</th>
+        <th style="width: 150px;">Csapat nemzetisége</th>
+    </tr>
+</table>
+
+<table border="1">
+    <app-pilota [pilota]="p" 
+        *ngFor="let p of pilotak" 
+        (törlésEsemény)="PilotaTorlese($event)"></app-pilota>
+</table>
