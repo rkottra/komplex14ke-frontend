@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { PilotakComponent } from './pilota/pilotak.component';
 import { FormsModule } from '@angular/forms';
+import { UjpilotaComponent } from './ujpilota/ujpilota.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PilotaComponent,
-    PilotakComponent
+    PilotakComponent,
+    UjpilotaComponent
   ],
   imports: [
     RouterModule,

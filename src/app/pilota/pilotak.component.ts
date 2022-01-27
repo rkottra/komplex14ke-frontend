@@ -46,7 +46,7 @@ export class PilotakComponent implements OnInit {
   }
 
   PilotaTorlese(model:PilotaModel) {
-    this.pilotaszerviz.deletePilota(model).subscribe();
+    this.pilotaszerviz.deletePilota(model);
   }
 
 }

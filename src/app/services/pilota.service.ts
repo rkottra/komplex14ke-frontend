@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { firstValueFrom, lastValueFrom, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { PilotaModel } from '../models/pilota.model';
 
@@ -9,12 +9,29 @@ import { PilotaModel } from '../models/pilota.model';
 })
 export class PilotaService {
 
-  constructor(private http: HttpClient) { }
+  private token :string = "";
+
+  constructor(private http: HttpClient) { 
+      
+    this.getToken().then( szerverről_érkezett_token=> {
+      this.token = szerverről_érkezett_token;
+      console.log("'"+this.token+"'");
+    });
+
+  }
+
+  async getToken():Promise<string> {
+    return firstValueFrom(await this.http.get("http://127.0.0.1:8000/api/csrf", {responseType: 'text'}));
+  }
+
+  insertPilota(p:PilotaModel) {
+    this.http.post("http://127.0.0.1:8000/api/pilota", {params: {ujpilota:p}}).subscribe();
+  }
 
   getPilotak(query:string = ""):Observable<PilotaModel[]> {
 
     return this.http
-        .get<any[]>("http://127.0.0.1:8000/pilotak", {params: {q:query}})
+        .get<any[]>("http://127.0.0.1:8000/api/pilotak", {params: {q:query}})
         .pipe(map(adatok_szerverről => {
                 let válasz :PilotaModel[] = [];
                     
@@ -25,16 +42,21 @@ export class PilotaService {
               }));
   }
 
-  deletePilota(model:PilotaModel):Observable<unknown> {
+  deletePilota(model:PilotaModel) {
     
-    return this.http.delete('http://127.0.0.1:8000/delete/'+model.ID)
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        throw(new Error(error.message));
-      })
-    );
+        let headers = new HttpHeaders(
+          {
+            "X-CSRF-TOKEN": this.token
+          }
+        );
 
-    
+        return this.http.delete('http://127.0.0.1:8000/api/pilota/'+model.ID, {headers})
+                          .pipe(
+                            catchError((error: HttpErrorResponse) => {
+                              throw(new Error(error.message));
+                            })
+                          ).subscribe();
   }
+  
 
 }

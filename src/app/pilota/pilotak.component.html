@@ -16,7 +16,10 @@
 </table>
 
 <table border="1">
-    <app-pilota [pilota]="p" 
-        *ngFor="let p of pilotak" 
+    <app-pilota *ngFor="let p of pilotak" 
+        [pilota]="p" 
         (törlésEsemény)="PilotaTorlese($event)"></app-pilota>
 </table>
+
+
+<app-ujpilota></app-ujpilota>
