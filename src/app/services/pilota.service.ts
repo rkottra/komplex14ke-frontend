@@ -24,8 +24,15 @@ export class PilotaService {
     return firstValueFrom(await this.http.get("http://127.0.0.1:8000/api/csrf", {responseType: 'text'}));
   }
 
-  insertPilota(p:PilotaModel) {
-    this.http.post("http://127.0.0.1:8000/api/pilota", {params: {ujpilota:p}}).subscribe();
+  insertPilota(p:PilotaModel):Observable<any> {
+    let seged = {
+      nev : p.nev,
+      nemzet : p.nemzet, 
+      szuletes: p.szuletes.getFullYear()+"-"+p.szuletes.getMonth()+"-"+p.szuletes.getDate(),
+      magassag: p.magassag,
+      csapat: p.csapat.ID
+    }
+    return this.http.post("http://127.0.0.1:8000/api/pilota", {params: {ujpilota:seged}});
   }
 
   getPilotak(query:string = ""):Observable<PilotaModel[]> {
@@ -42,7 +49,7 @@ export class PilotaService {
               }));
   }
 
-  deletePilota(model:PilotaModel) {
+  deletePilota(model:PilotaModel):Observable<any> {
     
         let headers = new HttpHeaders(
           {
@@ -55,7 +62,7 @@ export class PilotaService {
                             catchError((error: HttpErrorResponse) => {
                               throw(new Error(error.message));
                             })
-                          ).subscribe();
+                          );
   }
   
 

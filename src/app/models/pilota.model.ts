@@ -4,7 +4,7 @@ export class PilotaModel {
     ID : number = 0;
     nev: string = "";
     nemzet:string = "";
-    szuletes: number = Date.now();
+    szuletes: Date;
     magassag: number = 0;
     csapat: CsapatModel;
 

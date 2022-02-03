@@ -31,10 +31,18 @@ export class PilotakComponent implements OnInit {
   }
 
   kereses() {
+    this.frissitesEsemeny();
+  }
+
+  PilotaTorlese(model:PilotaModel) {
+    this.pilotaszerviz.deletePilota(model).subscribe(() => {
+      this.frissitesEsemeny();
+    });
+  }
+
+  frissitesEsemeny() {
     this.pilotaszerviz.getPilotak(this.query).subscribe(adatok => {
       this.pilotak = adatok;
-
-
       this._router.navigate([], {
         queryParams: {
           query: this.query
@@ -43,10 +51,6 @@ export class PilotakComponent implements OnInit {
       });
 
     });
-  }
-
-  PilotaTorlese(model:PilotaModel) {
-    this.pilotaszerviz.deletePilota(model);
   }
 
 }

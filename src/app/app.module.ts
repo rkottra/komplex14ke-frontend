@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,12 @@ import { RouterModule } from '@angular/router';
 import { PilotakComponent } from './pilota/pilotak.component';
 import { FormsModule } from '@angular/forms';
 import { UjpilotaComponent } from './ujpilota/ujpilota.component';
+import {CalendarModule} from 'primeng/calendar';
+import { InputTextModule} from 'primeng/inputtext';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {DropdownModule} from 'primeng/dropdown';
+
+
 
 @NgModule({
   declarations: [
@@ -20,9 +27,11 @@ import { UjpilotaComponent } from './ujpilota/ujpilota.component';
   imports: [
     RouterModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    InputTextModule,CalendarModule,InputNumberModule,DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
