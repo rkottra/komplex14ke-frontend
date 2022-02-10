@@ -14,6 +14,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { InputTextModule} from 'primeng/inputtext';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DropdownModule} from 'primeng/dropdown';
+import {DataViewModule} from 'primeng/dataview';
 
 
 
@@ -31,7 +32,7 @@ import {DropdownModule} from 'primeng/dropdown';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    InputTextModule,CalendarModule,InputNumberModule,DropdownModule
+    InputTextModule,CalendarModule,InputNumberModule,DropdownModule,DataViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

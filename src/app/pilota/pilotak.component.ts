@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelectItem } from 'primeng/api';
 import { PilotaModel } from '../models/pilota.model';
 import { PilotaService } from '../services/pilota.service';
 
@@ -13,6 +14,14 @@ export class PilotakComponent implements OnInit {
 
   public pilotak : PilotaModel[] = [];
   public query :string = "";
+  public sortField = "magassag";
+  public sortOrder:number = 1;
+  public sortOptions: SelectItem[] = [
+    {label: 'Csökkenő magasság szerint', value: '!magassag'},
+    {label: 'Növekvő magasság szerint', value: 'magassag'},
+    {label: 'Névsor szerint', value: 'nev'},
+    {label: 'Születési dátum szerint', value: ''},
+  ];
 
   constructor(private route:ActivatedRoute, private _router: Router, private pilotaszerviz:PilotaService) { 
 
@@ -28,7 +37,21 @@ export class PilotakComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
+
+  onSortChange(event:any) {
+    let value = event.value;
+
+    if (value.indexOf('!') === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+    }
+    else {
+        this.sortOrder = 1;
+        this.sortField = value;
+    }
+}
 
   kereses() {
     this.frissitesEsemeny();
